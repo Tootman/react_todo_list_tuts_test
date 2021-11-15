@@ -1,0 +1,15 @@
+https://www.youtube.com/watch?v=hQAHSlTtcmY
+Learn React In 30 Minutes
+
+Run app using
+$ npm start
+
+React rules:
+ - In React you should never directly alter the state ob. You always create a copy, modify the copy, and then use that copy to set the new state
+
+useful react Hooks:
+useRef - allows app to reference elements within the HTML eg value of Input box
+useEffect - a function that  takes two functions ist is func that manipulates  - and causes side effects eg saving, 2nd is an array of vars that it is 'watching' for changes
+
+Progress on Tut youtube: 23:41
+ - how/why toggleToto, passing down as prop, sharing its data between components 
