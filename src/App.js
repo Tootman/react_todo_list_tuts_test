@@ -5,7 +5,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
+const todoListStyle = {
+display: 'flex',
+flexWrap: 'wrap'
+}
+
 function App() {
+  // ?? useStatte returns an array of 2 items. 1st is oldState, 2nd is callback for to change
+  //
   const [todos, setTodos] = useState ([])
   const todoNameRef = useRef()
 
@@ -47,7 +54,9 @@ function toggleTodo (id) {
 
   return (
     <main>
-    <TodoList todos = {todos}/>
+    <section style={todoListStyle}>
+      <TodoList todos = {todos} toggleTodo={toggleTodo}/>
+    </section>
     <input ref={todoNameRef} type="text"/>
     <button onClick = {handleAddTodo}> Add Todo </button>
     <button> Clear Todos </button>
