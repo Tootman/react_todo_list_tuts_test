@@ -13,9 +13,14 @@ textAlign:'center',
 color:'red'
 }
 
-export default function Todo({todo, toggleTodo}) {
+export default function Todo({todo, toggleTodo, closeTodo}) {
   function handleTodoClick(){
     toggleTodo (todo.id)
+  }
+
+  function handleCloseTodoClick(){
+    // call the func to close item with id
+    closeTodo (todo.id)
   }
 
 
@@ -35,7 +40,7 @@ function HelloWorldComponent() {
     </label>
     </div>
     <div>
-      <button style={closeButton}>X</button>
+      <button style={closeButton} onClick={handleCloseTodoClick}>X</button>
     </div>
     </article>
   )

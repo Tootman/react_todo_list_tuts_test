@@ -36,6 +36,18 @@ function toggleTodo (id) {
   setTodos(newTodos)
 }
 
+function closeTodo (id) {
+  const newTodos = [...todos]
+// find the first todo that matches it's id
+  const todo = newTodos.find(todo=>todo.id === id)
+  // ar = ar.filter(item => !(item > 3));
+  const filteredTodos = newTodos.filter(item =>(item.id!=id))
+  console.log ("removing item with id= "+ id, filteredTodos)
+  setTodos(filteredTodos)
+
+}
+
+
   function handleAddTodo(e){
     const name = todoNameRef.current.value // refrences an element
     if (name==='') return
@@ -55,7 +67,7 @@ function toggleTodo (id) {
   return (
     <main>
     <section style={todoListStyle}>
-      <TodoList todos = {todos} toggleTodo={toggleTodo}/>
+      <TodoList todos = {todos} toggleTodo={toggleTodo} closeTodo = {closeTodo}/>
     </section>
     <input ref={todoNameRef} type="text"/>
     <button onClick = {handleAddTodo}> Add Todo </button>
