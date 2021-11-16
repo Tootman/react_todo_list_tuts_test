@@ -36,27 +36,37 @@ function toggleTodo (id) {
   setTodos(newTodos)
 }
 
+function changeDescription (event, id){
+  const newTodos = [...todos]
+  const todo = newTodos.find(todo=>todo.id === id)
+ // how to refer to textbox updated value
+  todo.description = event.target.value
+  setTodos(newTodos)
+  console.log("updated value: ",event.target.value)
+}
+
+
 function closeTodo (id) {
   const newTodos = [...todos]
 // find the first todo that matches it's id
   const todo = newTodos.find(todo=>todo.id === id)
   // ar = ar.filter(item => !(item > 3));
-  const filteredTodos = newTodos.filter(item =>(item.id!=id))
+  const filteredTodos = newTodos.filter(item =>(item.id!==id))
   console.log ("removing item with id= "+ id, filteredTodos)
   setTodos(filteredTodos)
-
 }
 
 
   function handleAddTodo(e){
-    const name = todoNameRef.current.value // refrences an element
+    const name = todoNameRef.current.value // references an element
     if (name==='') return
     console.log(name)
     setTodos(prevTodos =>{
       return [...prevTodos,
         {id:uuidv4(),
          name: name,
-         complete:false
+         complete:false,
+         description:"init value!"
        }]
     })
     todoNameRef.current.value = null
@@ -67,7 +77,7 @@ function closeTodo (id) {
   return (
     <main>
     <section style={todoListStyle}>
-      <TodoList todos = {todos} toggleTodo={toggleTodo} closeTodo = {closeTodo}/>
+      <TodoList todos = {todos} toggleTodo={toggleTodo} closeTodo = {closeTodo} changeDescription = {changeDescription}/>
     </section>
     <input ref={todoNameRef} type="text"/>
     <button onClick = {handleAddTodo}> Add Todo </button>

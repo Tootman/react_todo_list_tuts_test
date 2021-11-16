@@ -13,14 +13,18 @@ textAlign:'center',
 color:'red'
 }
 
-export default function Todo({todo, toggleTodo, closeTodo}) {
+export default function Todo({todo, toggleTodo, closeTodo, changeDescription}) {
   function handleTodoClick(){
     toggleTodo (todo.id)
   }
 
   function handleCloseTodoClick(){
     // call the func to close item with id
-    closeTodo (todo.id)
+    closeTodo ( todo.id)
+  }
+
+  function handleChangeDescription(event){
+    changeDescription(event, todo.id)
   }
 
 
@@ -36,7 +40,7 @@ function HelloWorldComponent() {
     </label>
     <div>
     <label>Description
-    <input type="text"></input>
+    <input type="text" value={todo.description} onChange={handleChangeDescription}></input>
     </label>
     </div>
     <div>
