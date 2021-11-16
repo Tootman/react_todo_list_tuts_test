@@ -1,5 +1,6 @@
 import {useState, useRef, useEffect} from 'react';
 import TodoList from './TodoList'
+import Counter from './Counter'
 import MyFuncComponent from './MyFuncComponent'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -14,6 +15,7 @@ function App() {
   // ?? useStatte returns an array of 2 items. 1st is oldState, 2nd is callback for to change
   //
   const [todos, setTodos] = useState ([])
+  const [stats,setStats] = useState({counter:0,lastId:null,myField:"hello"})
   const todoNameRef = useRef()
 
   useEffect(()=>{
@@ -21,6 +23,7 @@ function App() {
 // this is only called on init as empty array [] won't change
     const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
     if (storedTodos) setTodos(storedTodos)
+
   },[])
 
 useEffect (()=>{
@@ -54,8 +57,14 @@ function closeTodo (id) {
   const filteredTodos = newTodos.filter(item =>(item.id!==id))
   console.log ("removing item with id= "+ id, filteredTodos)
   setTodos(filteredTodos)
+  updateCounter()
 }
 
+function updateCounter(){
+  const oldStats = stats
+  oldStats.counter = todos.length + 1
+  setStats(oldStats)
+}
 
   function handleAddTodo(e){
     const name = todoNameRef.current.value // references an element
@@ -70,8 +79,7 @@ function closeTodo (id) {
        }]
     })
     todoNameRef.current.value = null
-
-
+    updateCounter()
   }
 
   return (
@@ -84,6 +92,7 @@ function closeTodo (id) {
     <button> Clear Todos </button>
     <div> left to do</div>
     <MyFuncComponent/>
+    <Counter stats={stats}/>
   </main>
   );
 }

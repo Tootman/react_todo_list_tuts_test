@@ -1,2 +1,2 @@
 Got to:
- - Description text is not being 'seen' as State, so not tracked, savedTolocal etc
+ - item counter not working 
